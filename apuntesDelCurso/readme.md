@@ -4,6 +4,7 @@
 * [Clase 01 - ¿Qué es Vite?](#id1)
 * [Clase 02 - Historia del Ecosistema de JavaScript](#id2)
 * [Clase 03 - Características de Vite](#id3)
+* [Clase 04 - ¿Cómo instalar Vite?](#id4)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -179,3 +180,93 @@ Optimiza el bundle de producción gracias a Rollup. La importación de dependenc
 ### Soporte a Web Workers y Web Assembly
 Los Web Workers son una característica de JavaScript que permiten crear procesos alternativos al proceso principal. Implementarlos puede llegar a tener una configuración complicada, pero con Vite no, teniendo la posibilidad de importarlos de una manera específica y estar listos para ser usados.
 Aunque también existe la posibilidad de importar un archivo Web Assembly e invocarlo donde queramos que se ejecute.
+
+## ¿Cómo instalar Vite? [4/19]<a name="id4"></a>
+Para comenzar a usar Vite.js vamos a ir a su documentación oficial https://vite.dev/ donde se podrá encontrar los beneficios que tiene, plugins, el repositorio público, las configuraciones disponibles, entre muchos más recursos que pueden ser útiles a la hora de querer profundizar los temas.
+
+### Creando un proyecto con Vite
+Se pueden generar diferentes proyectos con Vite a partir de una plantilla que bien puede ser de las siguientes tecnologías:
+
+vite-available-templates.png
+vite-resumen-clase04.webp
+
+> [!NOTE]
+> Antes de crear nuestro proyecto con Vite asegúrate de tener como mínimo instalado Node.js 14 o una versión superior y npm.
+
+### Comandos para generar un proyecto
+El comando para generar un proyecto con Vite es uno de los siguientes y dependerá del *gestor de paquetes* que utilices.
+
+> [!TIP]
+> **Con NPM**: npm create vite@latest
+> **Con Yarn**: yarn create vite
+> **Con PNPM**: pnpm create vite
+
+Además, existen plantillas desarrolladas por la comunidad que se pueden utilizar directamente en un proyecto.
+
+Con npm 6.x
+```
+npm create vite@latest my-vue-app --template vue
+```
+Con npm 7.x
+```
+npm create vite@latest my-vue-app -- --template vue 
+```
+Con Yarn
+```
+yarn create vite my-vue-app --template vue 
+```
+Con pnpm
+```
+pnpm create vite my-vue-app -- --template vue 
+```
+
+### Configuración básica
+Primero, tenemos que ir al editor de código de tu preferencia, en este caso emplearemos Visual Studio Code.
+Abrir la terminal, copia y pegar uno de los comandos antes vistos en el punto anterior.
+
+Pero antes, una muy buena recomendación es revisar las versiones de node y npm instalados en mi computador utilizando los siguientes comandos:
+> [!IMPORTANT]
+> node -v 
+> 20.18.0
+> npm -v
+> 10.8.2
+
+Y como punto de comparación, se agregan las versiones que el profesor utilizara en este curso:
+> [!IMPORTANT]
+> node -v 
+> 16.13.2
+> npm -v
+> 8.1.2
+
+Ahora comienza el desarrollo del curso, lo primero sera crear el proyecto, en la consola escribir el comando:
+```
+npm create vite@latest
+```
+
+Una vez empleado este comando, aparecerá una serie de opciones:
+1. **Project name**: Lo primero que preguntara es ¿cuál va a ser el nombre del proyecto?. *En mi caso el nombre sera vite-demo*.
+2. **Select a framework**: Después nos preguntará ¿que tipo de proyecto vamos a generar? (vanilla, react, vue, entre otras). *En mi caso escogeré vanilla*.
+3. **Select a variant**: A continuación nos pregunta ¿que variante queremos?, es decir, si lo queremos con solo JavaScript o TypeScript. *En mi caso escogeré JavaScript*.
+
+Se generan las carpetas y archivos por defecto.
+Desde la terminal, entrar a la nueva carpeta:
+```
+cd vite-demo
+```
+
+### Iniciando nuestro proyecto
+Ahora que el proyecto fue creado, se deben instalar los paquetes y dependencias necesarias para levantar el programa, se debe escribir el comando:
+```
+npm install
+```
+Una vez instaladas las dependencias, se puede inicializar y levantar el proyecto con el comando:
+```
+npm run dev
+```
+En la consola debería aparecer un mensaje como:
+```
+VITE v6.0.1  ready in 231 ms
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
