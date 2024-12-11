@@ -3,6 +3,7 @@
 ## Índice
 * [Clase 01 - ¿Qué es Vite?](#id1)
 * [Clase 02 - Historia del Ecosistema de JavaScript](#id2)
+* [Clase 03 - Características de Vite](#id3)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -132,3 +133,49 @@ Es un lenguaje de programación tipado que se transpila hacia JavaScript bastant
 ### Tercera generacion de herramientas
 De esta manera llegamos a Vite.js
 Su objetivo es mejorar la experiencia de desarrollo teniendo una mejor velocidad y menor configuración.
+
+## Características de Vite [3/19]<a name="id3"></a>
+En esta clase vamos a ver las principales características de Vite.
+Destaca la reinvención de muchos procesos, como la resolución de dependencias, la implementación con TypeScript, el HMR, entre muchas otras funcionalidades.
+
+### Optimización de código
+Vite optimiza muchos de los procesos por los que tiene que pasar el código, de ese modo se enfoca en un mejor rendimiento y experiencia de desarrollo.
+
+### Pre-bundling
+Es la etapa donde se estandarizan los módulos.
+Adapta los módulos en CommonJS o UMD y los pasa al formato estándar de ECMAScript.
+*Los módulos por muchos años NO estuvieron estandarizados hasta que apareció el estándar de ECMAScript con los ES Modules.*
+
+### Dependency resolving
+Vite optimiza el proceso en que se obtienen librerías y módulos estandarizados.
+Lo primero que hace Vite.js es generar un **servidor de archivos estático**, es decir, que va a tomar todos los archivos del proyecto y los va a hacer disponibles para acceder desde el navegador, de esta manera va a reemplazar los **imports** vía node.js por **imports URL**.
+También se asegura de servir los archivos de forma inteligente y con caché, para optimizar tiempo y procesamiento, esto lo hace subdividiendo las dependencias y ordenando las importaciones para que todo esté listo para el momento de uso, utilizando un caché fuerte, el cual se asegura que los archivos se queden en el navegador a menos que se limpie la caché del mismo
+
+### Hot module replacement (HMR)
+El HMR es cuando se hace **un cambio en el código y este se ve reflejado en el navegador casi de forma inmediata**, sin perder el estado de la aplicación y sin tener que recargar el navegador. Esto nos otorga una mejor experiencia de desarrollo al ser más rápido.
+
+### Importación de archivos
+Nos otorgará una importación de archivos simplificada. 
+*(Resuelve la importación sin necesidad de loaders.)* 
+Es simple de usar con archivos multimedia, estilos, código o con los preprocesadores más comunes, incluyendo TypeScript.
+
+### Integración simple con TypeScript
+Desde el primer momento, un proyecto con Vite tiene integración con TypeScript sin necesidad de alguna configuración adicional.
+Es opcional la configuración de TypeScript.
+Es totalmente utilizable con cualquier librería o framework.
+
+### Integración con frameworks
+Soporte perfecto con Vue.js
+Vite es desarrollado por el equipo de Vue.js por lo cual la integración es simple y completa.
+Útil para usar JSX con Vue.js
+Hace que sea extremadamente simple usar Vite con React.js
+
+### Optimización para producción
+Proporciona una serie de optimizaciones a la hora de transpilar para producción o también conocido como **build**.
+Permite tomar el control de la configuración. Se podrá utilizar la configuración por defecto tanto en desarrollo como en producción, o bien, se podrá tener una configuración más específica y controlada por el desarrollador.
+La velocidad en desarrollo aumenta gracias a esbuild.
+Optimiza el bundle de producción gracias a Rollup. La importación de dependencias se hace de modo inteligente, es decir, resuelve los módulos a emplear en el proyecto y predice hasta cierto punto los módulos que van a seguir, para importarlos desde un inicio.
+
+### Soporte a Web Workers y Web Assembly
+Los Web Workers son una característica de JavaScript que permiten crear procesos alternativos al proceso principal. Implementarlos puede llegar a tener una configuración complicada, pero con Vite no, teniendo la posibilidad de importarlos de una manera específica y estar listos para ser usados.
+Aunque también existe la posibilidad de importar un archivo Web Assembly e invocarlo donde queramos que se ejecute.
