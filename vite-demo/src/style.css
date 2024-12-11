@@ -1,4 +1,6 @@
 @import './base.css';
+@import './ejemplo.scss';
+@import './demo.less';
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

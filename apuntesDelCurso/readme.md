@@ -6,7 +6,8 @@
 * [Clase 03 - Características de Vite](#id3)
 * [Clase 04 - ¿Cómo instalar Vite?](#id4)
 * [Clase 05 - Boilerplate de Vite](#id5)
-* [Clase 06 - Importar CSS](#id6)
+* [Clase 06 - Importar CSS](#id6) 
+* [Clase 07 - Pre-procesadores CSS](#id7)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -311,7 +312,7 @@ Se crea un nuevo archivo de estilos llamado **base.css**.
 Dentro, se agrega la siguiente regla CSS:
 ```css
 body { 
-	background-color: #006a47; 
+    background-color: #006a47; 
 }
 ```
 
@@ -338,3 +339,52 @@ Si se desea eliminar estas copias se puede reiniciar el navegador o ir a la pest
 
 ### Optimizaciones de Vite
 Si vamos al último archivo **style.css** en el navegador, veremos que contiene el código hecho en base.css, esto sucede porque Vite une archivos suficientemente pequeños con otros, para tratarlos como solo uno. Si los archivos son demasiado grandes, va a tratarlos por separado.
+
+## Pre-procesadores CSS [7/19]<a name="id7"></a>
+Utilizar preprocesadores de CSS, como por ejemplo **Sass** o **Less**, en Vite, es demasiado fácil, literalmente no tenemos que hacer nada para empezar a usar estas tecnologías.
+
+### Empleando preprocesadores CSS en Vite
+Para emplear preprocesadores CSS **no se debe hacer ninguna configuración o instalar ninguna dependencia**.
+Vite ya integra estas tecnologías, se encarga de reconocerlas y procesarlas.
+
+### Ejemplo Sass
+Se crea un nuevo archivo que tendrá el nombre **ejemplo.sass**. 
+A dicho archivo se le agregan las siguientes reglas CSS:
+```css
+h1 { 
+	color: red; 
+}
+```
+
+Para que los cambios se apliquen, se debe importar el nuevo archivo .sass directamente a los estilos principales en el archivo **styles.css**.
+```css
+@import './ejemplo.sass';
+```
+Si se guardan los cambios y el servidor de desarrollo esta levantado, se produce un error, esto se debe a que *sass* no esta instalado, por lo que se debe abrir la consola del proyecto y ejecutar el siguiente comando:
+```
+npm install -D sass
+```
+> [!TIP]
+> Si en el navegador aun sigue apareciendo error, se puede cambiar la extension del archivo **.sass** por **.scss**
+
+Una vez que se guarden los cambios y se levante el servidor,  se vera como el título de la página cambia a color rojo.
+
+### Ejemplo less
+Se crea un nuevo archivo que tendrá el nombre **demo.less**.
+A dicho archivo se le agregan las siguientes reglas CSS:
+```css
+p {
+	background-color: white;
+}
+```
+Nuevamente, se importa el archivo en los estilos principales en el archivo **styles.css**.
+```css
+@import './demo.less';.
+```
+Si se guardan los cambios y el servidor de desarrollo esta levantado, se produce el mismo error de anterior, esto se debe a que *less* no esta instalado, por lo que se debe abrir la consola del proyecto y ejecutar el siguiente comando:
+```
+npm install -D less
+```
+
+Si el código se cargo de forma correcta, los textos tendrán un fondo de color blanco.
+![nuevos estilos css](img/clase7-1.png)
