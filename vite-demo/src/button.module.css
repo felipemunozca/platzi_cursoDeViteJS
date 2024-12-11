@@ -1,0 +1,10 @@
+.btn { 
+    border: 1px solid black;
+    padding: 8px 16px;
+    background-color: violet;
+    text-transform: uppercase;
+}
+
+.btn:hover { 
+    background-color: orange;
+}

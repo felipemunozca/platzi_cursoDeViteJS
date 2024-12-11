@@ -8,6 +8,7 @@
 * [Clase 05 - Boilerplate de Vite](#id5)
 * [Clase 06 - Importar CSS](#id6) 
 * [Clase 07 - Pre-procesadores CSS](#id7)
+* [Clase 08 - CSS Modules](#id8)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -388,3 +389,46 @@ npm install -D less
 
 Si el código se cargo de forma correcta, los textos tendrán un fondo de color blanco.
 ![nuevos estilos css](img/clase7-1.png)
+
+## CSS Modules [8/19]<a name="id8"></a>
+Los CSS modules son una tecnología para organizar nuestro código en CSS por medio de módulos, algo muy similar a como trabajamos con las librerías de JavaScript.
+
+### Uso de CSS modules en Vite
+Antes de comenzar a crear los módulos CSS, lo primero sera editar el archivo **main.js** para agregar una etiqueta de botón, esta etiqueta deberá tener un id único.
+```html
+<button id="btn" type="button">Haz click aquí</button>
+```
+El siguiente paso sera crear un nuevo archivo con la extension *.module.css*, es lo único que necesita Vite para poder crear un modulo.
+Se crea un nuevo archivo en la carpeta src llamado:  **button.module.css**.
+Dentro de este archivo vamos a generar unos estilos para el botón creado anteriormente:
+```css
+.btn {
+	border: 1px solid black;
+    padding: 8px 16px;
+    background-color: violet;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+	background-color: orange;
+}
+```
+### Importación de CSS modules en Vite
+Una vez generado el archivo y las reglas CSS, faltaría importarlo dentro del archivo **main.js**, pero a diferencia de los preprocesadores, se debe importan como un módulo:
+```javascript
+// N_8.1: Se importa el archivo con el css module y se le agrega un nombre único para identificarlo.
+import buttonStyle from './button.module.css';
+
+// N_8.2: Para hacer una prueba si se importo correctamente el archivo, se puede utilizar un console.log. 
+// En la consola aparecerá el botón como un objeto. 
+// Dentro de btn aparecerá una cadena de texto, esto representa una clase en CSS.
+console.log(buttonStyle);
+
+// N_8.3: Finalmente, se puede agregar la nueva clase al botón utilizando las propiedades de javascript.
+document.getElementById('btn').className = buttonStyle.btn;
+```
+
+Cuando se guarden los cambios, el botón tendrá los estilos que indicados en el módulo.
+![nuevo botón creado](img/clase8-1.png)
+
+Esta es una manera estándar que nos ofrece CSS para separar nuestro código y que los estilos sean únicos hacia el componente que lo estamos importando.
