@@ -6,6 +6,7 @@
 * [Clase 03 - Características de Vite](#id3)
 * [Clase 04 - ¿Cómo instalar Vite?](#id4)
 * [Clase 05 - Boilerplate de Vite](#id5)
+* [Clase 06 - Importar CSS](#id6)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -282,6 +283,8 @@ Un boilerplate de Vite utilizando la plantilla para vanilla JavaScript contiene 
 ### Punto de entrada
 Ya que Vite es una herramienta pensada para el frontend, el punto de entrada de nuestra aplicación es él archivo **index.html**. *(Aunque si lo deseas puedes cambiarlo a través de la configuración de Vite).* 
 Este archivo siempre se encontrara en la raíz del proyecto.
+> [!TIP]
+> Si se desea cambiar el idioma de la pagina web de ingles a español, se puede hacer editando el archivo index.html que esta en la carpeta raiz.
 
 ### Archivos JavaScript
 Dentro de la carpeta *src* se encuentra el archivo **main.js**, el cual tiene como principal funcionalidad darle la lógica a nuestra página. 
@@ -298,3 +301,40 @@ Si seguimos revisando los archivos, en la carpeta raiz encontraremos el archivo 
 * **dev**: Inicializa el servidor.
 * **build**: Genera nuestro proyecto para producción y lo almacenara en la carpeta dist que se creara automaticamente.
 * **preview**: Una vez tenemos nuestro proyecto para producción se ejecuta este comando, el cual toma lo que está en la carpeta dist y lo muestra en un servidor.
+
+## Importar CSS [6/19]<a name="id6"></a>
+Importar archivos con Vite es muy simple, por ejemplo para los archivos de estilos solo debemos de usar la palabra **@import** y a continuación la ruta del archivo dentro de comillas. 
+Para los archivos en JavaScript sería muy parecido, solo que se remplaza **@import** por **import**.
+
+### Manejo de estilos en Vite
+Se crea un nuevo archivo de estilos llamado **base.css**.
+Dentro, se agrega la siguiente regla CSS:
+```css
+body { 
+	background-color: #006a47; 
+}
+```
+
+### Importando estilos
+Si levantamos el proyecto veremos que el fondo de la pagina sigue siendo blanco, esto es porque aun nos falta importar que creamos.
+Debemos de importar el archivo **base.css** dentro de **style.css**.
+```css
+@import './base.css';
+```
+Si el código CSS fue agregado correctamente, ahora el color de fondo de la pagina web sera verde.
+> [!IMPORTANT]
+> Importante, se debe utilizar *@import* y a continuación la ruta de los estilos.
+
+### Analizando los estilos
+Si abrimos las **herramientas de desarrollo** en el navegador y nos dirigimos a la pestaña de **network** encontraremos algo bien curioso, como puedes ver se cargó más de un style.css, esto es porque una vez se guardan los cambios, los archivos que cambiaron son nuevamente solicitados.
+
+![análisis de archivos](img/clase6-1.png)
+
+Ahora, en la pestaña de **sources** también abra más de un style.css, porque cada cambio que se hace en un archivo creara una copia y la almacenara en caché, para que esté disponible de un modo más rápido.
+
+Si se desea eliminar estas copias se puede reiniciar el navegador o ir a la pestaña **application**, oprimir el botón *clear site data*, reiniciar la página y ver como se trae la última versión de tu código.
+
+![limpiar data](img/clase6-2.png)
+
+### Optimizaciones de Vite
+Si vamos al último archivo **style.css** en el navegador, veremos que contiene el código hecho en base.css, esto sucede porque Vite une archivos suficientemente pequeños con otros, para tratarlos como solo uno. Si los archivos son demasiado grandes, va a tratarlos por separado.
