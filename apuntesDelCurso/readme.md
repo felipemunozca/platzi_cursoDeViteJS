@@ -5,6 +5,7 @@
 * [Clase 02 - Historia del Ecosistema de JavaScript](#id2)
 * [Clase 03 - Características de Vite](#id3)
 * [Clase 04 - ¿Cómo instalar Vite?](#id4)
+* [Clase 05 - Boilerplate de Vite](#id5)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -187,8 +188,7 @@ Para comenzar a usar Vite.js vamos a ir a su documentación oficial https://vite
 ### Creando un proyecto con Vite
 Se pueden generar diferentes proyectos con Vite a partir de una plantilla que bien puede ser de las siguientes tecnologías:
 
-vite-available-templates.png
-vite-resumen-clase04.webp
+![template soportados](img/clase4-1.png)
 
 > [!NOTE]
 > Antes de crear nuestro proyecto con Vite asegúrate de tener como mínimo instalado Node.js 14 o una versión superior y npm.
@@ -245,7 +245,7 @@ npm create vite@latest
 
 Una vez empleado este comando, aparecerá una serie de opciones:
 1. **Project name**: Lo primero que preguntara es ¿cuál va a ser el nombre del proyecto?. *En mi caso el nombre sera vite-demo*.
-2. **Select a framework**: Después nos preguntará ¿que tipo de proyecto vamos a generar? (vanilla, react, vue, entre otras). *En mi caso escogeré vanilla*.
+2. **Select a framework**: Después nos preguntará ¿que tipo de proyecto vamos a generar? (vanilla, vue, react, svelte, entre otras). *En mi caso escogeré vanilla*.
 3. **Select a variant**: A continuación nos pregunta ¿que variante queremos?, es decir, si lo queremos con solo JavaScript o TypeScript. *En mi caso escogeré JavaScript*.
 
 Se generan las carpetas y archivos por defecto.
@@ -270,3 +270,31 @@ VITE v6.0.1  ready in 231 ms
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ```
+
+## Boilerplate de Vite [5/19]<a name="id5"></a>
+Una vez iniciado un proyecto con una plantilla de Vite tendrás a tu disposición una estructura básica de archivos, que nos facilitara iniciar con el desarrollo. Cada plantilla tiene su propia estructura, y por suerte todo funciona de una manera similar.
+
+### Archivos básicos de una plantilla de Vite
+Un boilerplate de Vite utilizando la plantilla para vanilla JavaScript contiene los siguientes tipos de archivo.
+
+![lista de archivos](img/clase5-1.png)
+
+### Punto de entrada
+Ya que Vite es una herramienta pensada para el frontend, el punto de entrada de nuestra aplicación es él archivo **index.html**. *(Aunque si lo deseas puedes cambiarlo a través de la configuración de Vite).* 
+Este archivo siempre se encontrara en la raíz del proyecto.
+
+### Archivos JavaScript
+Dentro de la carpeta *src* se encuentra el archivo **main.js**, el cual tiene como principal funcionalidad darle la lógica a nuestra página. 
+Además, existe un archivo **counter.js**, donde se exporta una función utilizada en **main.js** para aumentar el contador de la página.
+
+### Estilos de nuestro proyecto
+El archivo **style.css** contiene todos los estilos de la página. Más adelante, cuando ejecutes el proyecto en el navegador y veamos el tema de la carpeta dist, se podra ver que Vite convertirá este y en general muchos de los archivos, en un paquete de ECMAScript module, para poder utilizarlo de manera universal en todos los navegadores.
+
+### Imágenes SVG
+Podremos encontrar archivos .svg como vite.svg o javascript.svg, los cuales son imágenes para la página, no son necesarias para el funcionamiento de la aplicación y pueden ser cambiadas o eliminadas en un futuro.
+
+### Scripts
+Si seguimos revisando los archivos, en la carpeta raiz encontraremos el archivo **package.json**, en donde podremos encontrar el nombre de nuestra aplicación, la versión, las dependencias y los siguientes scripts que se generaron automaticamente:
+* **dev**: Inicializa el servidor.
+* **build**: Genera nuestro proyecto para producción y lo almacenara en la carpeta dist que se creara automaticamente.
+* **preview**: Una vez tenemos nuestro proyecto para producción se ejecuta este comando, el cual toma lo que está en la carpeta dist y lo muestra en un servidor.
