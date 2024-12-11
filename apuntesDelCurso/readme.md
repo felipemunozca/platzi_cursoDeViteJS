@@ -9,6 +9,7 @@
 * [Clase 06 - Importar CSS](#id6) 
 * [Clase 07 - Pre-procesadores CSS](#id7)
 * [Clase 08 - CSS Modules](#id8)
+* [Clase 09 - Importar imágenes](#id9)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -403,14 +404,14 @@ Se crea un nuevo archivo en la carpeta src llamado:  **button.module.css**.
 Dentro de este archivo vamos a generar unos estilos para el botón creado anteriormente:
 ```css
 .btn {
-	border: 1px solid black;
+    border: 1px solid black;
     padding: 8px 16px;
     background-color: violet;
     text-transform: uppercase;
 }
 
 .btn:hover {
-	background-color: orange;
+    background-color: orange;
 }
 ```
 ### Importación de CSS modules en Vite
@@ -432,3 +433,34 @@ Cuando se guarden los cambios, el botón tendrá los estilos que indicados en el
 ![nuevo botón creado](img/clase8-1.png)
 
 Esta es una manera estándar que nos ofrece CSS para separar nuestro código y que los estilos sean únicos hacia el componente que lo estamos importando.
+
+## Importar imágenes [9/19]<a name="id9"></a>
+Importar una imagen o cualquier archivo multimedia con Vite es bastante sencillo, simplemente debes de usar la palabra clave import, definir un nombre para la imagen e indicar donde se encuentra.
+Se agrega una imagen dentro de la carpeta src.
+Luego se edita el archivo **main.js** para realizar la importación de la imagen.
+```javascript
+// N_9.5: Se importan los estilos CSS propios de la imagen.
+import imageStyle from './image.module.css';
+
+// N_9.1: Se importa la imagen desde la carpeta raíz.
+import img from './gatito.jpg';
+
+// N_9.2: Se crea una etiqueta dentro de la plantilla #app y se le asigna un id único que pronto utilizaremos.
+<img id="my-img"/>
+
+// N_9.3: Se crea una constante para poder asignar la etiqueta de tenga el id "my-img".
+const imagen = document.getElementById('my-img')
+// N_9.4: Utilizando las propiedades de JavaScript se asigna la imagen a la etiqueta y posteriormente, se le asigna su clase css.
+imagen.src = img;
+imagen.className = imageStyle.img
+```
+El resultado debería ser algo asi:
+![imagen del gato](img/clase9-1.png)
+
+### ¿Cómo está pasando?
+Al abrir las herramientas de desarrollo, en la pestaña de sources, podremos encontrar dos archivos.
+* Nuestra imagen
+* Un archivo de JavaScript con el nombre de la imagen y adicionalmente la palabra ?import.
+![viendo archivos en el navegador](img/clase9-2.png)
+
+Este último es un ECMAScript module que contiene nuestra imagen. Vite convierte todo a un ECMAScript module para un mejor rendimiento.
