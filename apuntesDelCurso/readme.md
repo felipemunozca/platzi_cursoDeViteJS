@@ -10,6 +10,7 @@
 * [Clase 07 - Pre-procesadores CSS](#id7)
 * [Clase 08 - CSS Modules](#id8)
 * [Clase 09 - Importar imágenes](#id9)
+* [Clase 10 - Importar JSON](#id10)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -464,3 +465,50 @@ Al abrir las herramientas de desarrollo, en la pestaña de sources, podremos enc
 ![viendo archivos en el navegador](img/clase9-2.png)
 
 Este último es un ECMAScript module que contiene nuestra imagen. Vite convierte todo a un ECMAScript module para un mejor rendimiento.
+
+## Importar JSON [10/19]<a name="id10"></a>
+Con Vite podemos importar todo el contenido de un archivo JSON de una manera muy simple, aunque también podemos traer partes específicas para optimizar el código y mejorar el rendimiento en producción.
+
+### Importar JSON
+Para comenzar, se crea un nuevo archivo JSON que se llamara **data.json** y contendrá la siguiente información:
+```
+{
+	"user": {
+		"name": "Felipe",
+		"lastname": "Muñoz"
+	},
+	"session": {
+		"id": "string session" 
+	}
+}
+```
+Una propiedad de usuario que tendrá su nombre y apellido.
+Una propiedad de sesión como si se tratara de una pagina web.
+
+A continuación, para importar el archivo JSON lo haríamos igual que como lo hemos hecho en clases anteriores. Se debe importar dentro del archivo **main.js**:
+```javascript
+import data from "./data.json";
+```
+Dentro del selector "#app" se agrega una etiqueta < pre > para poder visualizar la información del json.
+Se utiliza la función **JSON.stringify()** para pasar la data y traer todo el objeto json directamente a la etiqueta.
+```javascript
+<pre>${JSON.stringify(data)}</pre>
+```
+
+### Import especifico
+Con el método anterior estamos importando todo el archivo, lo que lo vuelve mas pesado y lento, pero podemos hacer un ajuste para visualizar partes específicas destructurando el objeto.
+Si solo se quiere traer una parte especifica del JSON, por ejemplo el user, se agrega a la petición utilizando un punto de separación.
+```javascript
+<pre>${JSON.stringify(data.user)}</pre>
+```
+![cargar json al proyecto](img/clase10-1.png)
+
+### Enviar el proyecto a producción
+Con los cambios y pruebas que hemos realizados hasta ahora, se realiza una prueba enviando el proyecto a producción. Para esto se debe ejecutar el comando:
+```
+npm run build
+```
+Se genera automáticamente la carpeta **dist**. Dentro, los archivos tendrán un nombre compuesto por el nombre original del archivo, seguido de un hash (serie de números y letras).
+![lista de archivos](img/clase10-2.png)
+
+Dentro del archivo mainxxxxx.js revisar como queda el código al cargar el json y la diferencia entre ambas opciones.

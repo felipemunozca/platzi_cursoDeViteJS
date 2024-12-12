@@ -3,12 +3,13 @@ import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
-import buttonStyle from './button.module.css';
-import imageStyle from './image.module.css';
+// import buttonStyle from './button.module.css';
+// import imageStyle from './image.module.css';
+import data from './data.json';
 
 import img from './gatito.jpg';
 
-console.log(buttonStyle);
+// console.log(buttonStyle);
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -22,18 +23,25 @@ document.querySelector('#app').innerHTML = `
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
-    <img id="my-img"/>
-    <button id="btn" type="button">Haz click aquí</button>
+    <div>
+      <pre>${JSON.stringify(data)}</pre>
+      <pre>${JSON.stringify(data.user)}</pre>
+    </div>
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
   </div>
 `
+/**
+ * Etiquetas quitadas:
+ * <img id="my-img"/>
+ * <button id="btn" type="button">Haz click aquí</button>
+ */
 
-document.getElementById('btn').className = buttonStyle.btn;
+// document.getElementById('btn').className = buttonStyle.btn;
 
-const imagen = document.getElementById('my-img');
-imagen.src = img;
-imagen.className = imageStyle.img;
+// const imagen = document.getElementById('my-img');
+// imagen.src = img;
+// imagen.className = imageStyle.img;
 
 setupCounter(document.querySelector('#counter'))
