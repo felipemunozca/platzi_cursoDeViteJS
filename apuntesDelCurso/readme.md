@@ -13,6 +13,7 @@
 * [Clase 10 - Importar JSON](#id10)
 * [Clase 11 - Importación global](#id11)
 * [Clase 12 - Uso con TypeScript](#id12)
+* [Clase 13 - Vite Config](#id13)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -635,3 +636,57 @@ El código en javascript que escribimos manualmente ahora estará transformado a
 
 Por ultimo si se desea saber mas de como usar un archivo **tsconfig** y sus diferentes opciones, se puede visitar este enlace oficial de la documentación de TypeScript.
 https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+## Vite Config [13/19]<a name="id13"></a>
+Otra de las propiedades únicas de Vite, es que se puede crear su propio archivo de configuración.
+Antes de continuar, para resolver cualquier duda, revisar la documentación oficial:
+https://vite.dev/config/#config-file-resolving
+
+### Configurando Vite
+Dentro de la carpeta raíz, se crea un nuevo archivo llamado **"vite.config.js"** (La configuración se realizara con javascript).
+Con el archivo vite.config.js podremos tomar el control de todo lo que hace Vite y poder reescribir sus configuraciones por defecto, desde cambiar la carpeta, raíz del proyecto, configuraciones al servidor, uso de plugins, opciones para el build, entre muchas más.
+
+### Primer método de configuración
+Existen varias formas de configurar Vite, la más sencilla es exportando un JSON. 
+En esta clase se configurara las opciones del servidor, empezando por cambiar el puerto donde se ejecuta nuestro proyecto.
+En mi maquina, por defecto se esta utilizando el puerto: 5173.
+Dentro dela archivo **vite.config.js** lo primero sera exportar por defecto, el valor de *server* y luego definir cual sera el nuevo *port* a utilizar, en este caso, el 8080.
+```javascript
+export default {
+	server: {
+		port: 8080,
+	},
+};
+```
+Si se guarda este cambio y se intenta actualizar el proyecto que ya esta levantado, se caerá, ya que el puerto no es el mismo, por lo que si se baja el proyecto y luego se vuelve a levantar, la terminación de la URL debería incluir el nuevo puerto.
+
+### Segundo método de configuración
+En algunas ocasiones puede que necesites hacer algo mas complejo, por ejemplo usar TypeScript, para esto Vite nos ofrece otro método de configuración, uno donde el código en TypeScript es autocompletado. Pero muy importante, como NO se puede usar un JSON directamente, se crea una función.
+
+Se importa el modulo de Vite y se utiliza un método llamado *defineConfig*.
+Luego solo se debe exportar la función y dentro de esta la configuración en un formato JSON.
+```javascript
+import { defineConfig } from "vite";
+
+export default defineConfig({
+	server: {
+		port: 8080,
+	},
+});
+```
+
+Ademas, se puede personalizar aun mas el código, se puede crear una *función flecha* para poder agregar aun mas configuraciones propias como por ejemplo; agregar un *return* y definir en una constante el puerto del servidor.
+```javascript
+import { defineConfig } from "vite";
+
+export default defineConfig(() => {
+	const port = 8080;
+
+	return {
+		server: {
+			port
+		},
+	};
+});
+```
+Este ejemplo nos sirve para entender que aquí se puede agregar una llamada al backend, a una API, a alguna información que nos ayude a tomar decisiones.
