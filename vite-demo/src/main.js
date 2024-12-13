@@ -9,16 +9,22 @@ import data from './data.json';
 
 import img from './gatito.jpg';
 
-const modules = import.meta.glob('../modules/*.js')
-console.log(modules)
+// const modules = import.meta.glob('../modules/*.js')
+// console.log(modules)
+
 // console.log(buttonStyle);
 
+import suma from './suma.ts';
+console.log(`suma 2+3 = ${suma(2, 3)}`)
+
+/*
 for (const path in modules) {
   modules[path]()
   .then((module) => {
     module.load()
   })
 }
+*/
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -32,10 +38,6 @@ document.querySelector('#app').innerHTML = `
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
-    <div>
-      <pre>${JSON.stringify(data)}</pre>
-      <pre>${JSON.stringify(data.user)}</pre>
-    </div>
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
@@ -45,6 +47,10 @@ document.querySelector('#app').innerHTML = `
  * Etiquetas quitadas:
  * <img id="my-img"/>
  * <button id="btn" type="button">Haz click aquí</button>
+ * <div>
+ *   <pre>${JSON.stringify(data)}</pre>
+ *   <pre>${JSON.stringify(data.user)}</pre>
+ * </div>
  */
 
 // document.getElementById('btn').className = buttonStyle.btn;

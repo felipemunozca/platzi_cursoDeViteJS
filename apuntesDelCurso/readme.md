@@ -12,6 +12,7 @@
 * [Clase 09 - Importar imágenes](#id9)
 * [Clase 10 - Importar JSON](#id10)
 * [Clase 11 - Importación global](#id11)
+* [Clase 12 - Uso con TypeScript](#id12)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -584,3 +585,53 @@ for (const path in modules) {
 
 Si el código se escribió de forma correcta, en la consola del navegador se deberían ver los mensajes escritos en cada modulo.
 ![resultados en la consola](img/clase11-2.png)
+
+## Uso con TypeScript [12/19]<a name="id12"></a>
+Ahora vamos a ver como Vite detecta y procesa los archivos de TypeScript sin la necesidad de tener que hacer una configuración complicada, aunque si nosotros lo deseamos podemos cambiar esa configuración por defecto y que TypeScript se comporte como nosotros queramos.
+
+### Usando TypeScript con Vite
+Para comenzar a utilizar TypeScript en este proyecto literalmente no tenemos que hacer nada. 
+Se crea un nuevo archivo que se llamara **suma.ts**, dentro se crea una función para sumar dos valores.
+Se utiliza el sistema de tipos de typescript para definir que tipo de dato tendrá cada variable, asi como el valor del retorno.
+
+```javascript
+export default function suma(a: number, b: number): number {
+    return a + b
+}
+```
+
+Ahora dentro del archivo **main.js** se puede importar la nueva función y Vite detectara automáticamente que es un archivo de TypeScript, además se encargara de procesarlo. 
+Se utiliza la consola para ejecutar la función, se le pasan 2 parámetros y si el archivo se importo correctamente, la consola mostrara el resultado de la suma.
+```javascript
+import suma from './suma.ts';
+
+console.log(`suma 2+3 = ${suma(2, 3)}`);
+```
+
+![suma en la consola](img/clase12-1.png)
+
+### Configuración personalizada de TS
+Si queremos cambiar la configuración por defecto de Vite para utilizar TypeScript con una configuración propia.
+Se crea un nuevo archivo en la carpeta raíz llamado **tsconfig.json**.
+Dentro de este archivo se agrega una configuración de ejemplo. Se crea un objeto y dentro se declara la propiedad *compilerOptions* que es una opción que permite personalizar la construcción del proyecto.
+Se configura el *target*, es decir, para que version especifica de javascript se generara la salida en código.
+De esta manera se puede generar el código dependiendo de que version de javascript desea utilizar el desarrollador, en este caso, la version *ECMAScript 2015*.
+```json
+{
+	"compilerOptions": {
+		"target": "ES2015"
+	}
+}
+```
+> [!IMPORTANT]
+> Si se utiliza la opción de personalizar, cuando se ejecute el código, se recomienda limpiar la cache del navegador ya que puede que los cambios no se refresquen solo con actualizar el navegador.
+
+Para probar si funciono la configuración, se ejecuta el comando:
+```npm
+npm run build
+```
+Se creara la carpeta **dist** y si esta ya existe, solo se actualizara su contenido.
+El código en javascript que escribimos manualmente ahora estará transformado a la version definida en la configuración.
+
+Por ultimo si se desea saber mas de como usar un archivo **tsconfig** y sus diferentes opciones, se puede visitar este enlace oficial de la documentación de TypeScript.
+https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
