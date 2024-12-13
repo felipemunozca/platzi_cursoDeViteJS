@@ -14,6 +14,7 @@
 * [Clase 11 - Importación global](#id11)
 * [Clase 12 - Uso con TypeScript](#id12)
 * [Clase 13 - Vite Config](#id13)
+* [Clase 13 - Variables de entorno y modos](#id14)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -690,3 +691,89 @@ export default defineConfig(() => {
 });
 ```
 Este ejemplo nos sirve para entender que aquí se puede agregar una llamada al backend, a una API, a alguna información que nos ayude a tomar decisiones.
+
+## Variables de entorno y modos [14/19]<a name="id14"></a>
+Continuando con lo visto en la clase anterior, hay dos conceptos que se necesitan entender y que pueden llegar a ser bastante útiles:
+1. **Variables de entorno**, son variables externas a nuestro proyecto y no son más que un nombre asignado a un valor.
+2. **Modos**, que son formas de correr un proyecto y como lo hemos visto en clases anteriores, existen dos, el modo de desarrollo (*dev*) y el modo de producción (*build*).
+
+### Modos
+Continuemos editando el archivo **vite.config.js**.
+Se agregan como parámetro **command**, **mode** (*Se agregan dentro de llaves { } para obtener el valor directamente, en caso de no querer hacerlo asi, se deben crear las variables por separado y agregarlos dentro del paréntesis normal*)
+Se agrega un console para ver que mensaje nos aparece
+```javascript
+import { defineConfig } from "vite";
+
+export default defineConfig(({ command, mode }) => {
+	const port = 8080;
+
+	console.log(comando: ${command} y modo: ${mode});
+
+	return {
+		server: {
+			port
+		},
+	};
+});
+```
+Si el servidor esta abajo y se ejecuta el comando
+```
+npm run dev
+```
+Aparecerá un mensaje de la siguiente manera:
+![mensaje dev](img/clase14-1.png)
+
+Pero si se vuelve a bajar el servidor, y esta vez se ejecuta el comando: 
+```
+npm run build
+```
+Aparecerá un mensaje de la siguiente manera:
+![mensaje build](img/clase14-2.png)
+
+Este método de programación puede llegar a ser útil porque se puede implementar una lógica dependiendo del modo en que estemos, en el siguiente ejemplo muy básico se imprimirá un mensaje dependiendo del modo.
+
+```javascript
+import { defineConfig } from "vite";
+
+export default defineConfig(({ command, mode }) => {
+	const port = 8080;
+
+	if (command === "development") {
+		console.log("Modo desarrollo");
+	} else {
+		console.log("Modo producción");
+	}
+
+	return {
+		server: {
+			port
+		},
+	};
+});
+```
+
+### Variables de entorno
+Dentro de la carpeta raíz del proyecto se crea un nuevo archivo llamado **.env** y dentro de este archivo se crearan las variables de entorno que sean necesarias.
+*(Su uso principal es para definir llaves secretas que nadie debería ver en el servidor)*.
+
+#### Estructura de una variable de entorno
+La estructura de una variable de entorno en Vite es la siguiente: **VITE_NOMBRE_DE_VARIABLE=valor**.
+Vite por defecto no lee ninguna de estas variables, la única forma de que las reconozca es agregando el valor **VITE_** antes del nombre.
+```
+VITE_NAME="Vite demo curso Platzi"
+VITE_PORT=8080
+```
+
+### Usando variables de entorno
+Dentro del archivo **vite.config.js**, se debe importar el nombre de la función **loadEnv** para poder utilizar las variables.
+Se crea una nueva constante, donde se almacenara el valor de env, seguido de la función **loadEnv()** y dentro debe llevar dos valores:
+* El modo en que se esta trabajando y
+* El directorio o ubicación donde esta el archivo.
+Se utiliza una función de Node, la función process.cwd() que buscara en todas las carpetas.
+Se agrega un console.log y si el código esta correcto, en la consola aparecerá la información del archivo .env asi como una búsqueda mas detallada de un solo valor.
+![mensajes env](img/clase14-3.png)
+
+### Acerca de loadEnv
+loadEnv() recibe dos parámetros, que son: 
+1. **Modo** en el que estamos (modo desarrollo o modo producción). Esto debido a que nuestro archivo .env también puede tener el nombre de *.env.development* o *.env.production*, si estamos en modo producción se traerán las variables que estén en *.env.development*, si estamos en modo producción se traerán las variables de *.env.production* y si no existen ninguno de estos archivos se traerá por defecto las de .env. 
+2. **Ubicación** por la cual se accede vía Nodejs para leer el archivo. Para acceder a la ubicación podemos usar process.cwd(), una función de Nodejs que nos entrega la dirección del proyecto.
