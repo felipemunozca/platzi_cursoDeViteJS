@@ -9,7 +9,16 @@ import data from './data.json';
 
 import img from './gatito.jpg';
 
+const modules = import.meta.glob('../modules/*.js')
+console.log(modules)
 // console.log(buttonStyle);
+
+for (const path in modules) {
+  modules[path]()
+  .then((module) => {
+    module.load()
+  })
+}
 
 document.querySelector('#app').innerHTML = `
   <div>

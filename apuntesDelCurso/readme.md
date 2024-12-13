@@ -11,6 +11,7 @@
 * [Clase 08 - CSS Modules](#id8)
 * [Clase 09 - Importar imágenes](#id9)
 * [Clase 10 - Importar JSON](#id10)
+* [Clase 11 - Importación global](#id11)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -512,3 +513,74 @@ Se genera automáticamente la carpeta **dist**. Dentro, los archivos tendrán un
 ![lista de archivos](img/clase10-2.png)
 
 Dentro del archivo mainxxxxx.js revisar como queda el código al cargar el json y la diferencia entre ambas opciones.
+
+## Importación global [11/19]<a name="id11"></a>
+La importación global nos permite importar archivos de forma masiva, es decir, poder tomar toda una carpeta e importarla de una sola vez para usarla dentro del código.
+
+### Creando los módulos
+Primero, se deben crear los archivos que queremos importar. 
+En este ejemplo se creara una carpeta con el nombre **modules** y dentro se agregaran dos archivos, **module1.js** y **module2.js**.
+
+### module1.js
+Se crea una función, cuando el modulo este cargado se mostrara un mensaje con el nombre del modulo.
+Ademas, se exporta el modulo para poder utilizarlo dentro de otros archivos.
+```javascript
+const module = {
+	name: "modulo 1"
+}
+
+export function load() {
+	console.log(`${module.name} cargado!`)
+}
+
+export default module
+```
+
+### module2.js
+Se copia y pega el código del modulo anterior, solo se cambia el nombre.
+Ademas, se escriben los mensajes ingles, para dejar una diferencia visible.
+```javascript
+const module = {
+    name: "module 2"
+}
+
+export function load() {
+    console.log(`${module.name} load!`)
+}
+
+export default module
+```
+
+### Global import
+Ahora que se han creado los archivos de ejemplo, se deben importar, para esto se crea una constante, a la cual se le asigna la ruta utilizando las propiedades *meta.glob()*.
+Dentro la ruta se utiliza el comodín de asterisco que indica todos los archivos que tengan la extension *.js* se guardaran en la constante.
+```javascript
+const modules = import.meta.glob('../modules/*.js')
+```
+
+### Usando nuestros módulos
+Se utiliza la consola para realizar una prueba para ver que esta retornando la constante modules.
+Si la ruta esta correcta, debería leerse como un json que contiene los diferentes módulos.
+```javascript
+console.log(modules);
+```
+Si imprimimos modules veremos que estamos importando un JSON que contiene los diferentes módulos, es por esto que podemos iterarlo con un for In y ejecutar las funciones load que tiene cada archivo.
+
+![lista de módulos](img/clase11-1.png)
+
+Ya que la ruta de los módulos esta correcta:
+1. Se crea un *for In* el cual recorrerá la lista de módulos: *for (const path in modules) {}*
+2. Después con la llave o key de la iteración *(path)* se accede a cada uno de los módulos que están en *modules*, como esto es una función deberemos ejecutarla agregando los paréntesis.
+3. Al ejecutarla nos estará devolviendo una promesa, por lo que podremos emplear *.then()* para acceder al *module*.
+4. Dentro de *.then()* se utiliza una *función flecha* que tome el módulo actual y ejecute la función *load()* de cada archivo de módulo.
+```javascript
+for (const path in modules) {
+	modules[path]()
+	.then((module) => {
+		module.load()
+	})
+}
+```
+
+Si el código se escribió de forma correcta, en la consola del navegador se deberían ver los mensajes escritos en cada modulo.
+![resultados en la consola](img/clase11-2.png)
