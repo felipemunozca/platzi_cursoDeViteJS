@@ -14,7 +14,8 @@
 * [Clase 11 - Importación global](#id11)
 * [Clase 12 - Uso con TypeScript](#id12)
 * [Clase 13 - Vite Config](#id13)
-* [Clase 13 - Variables de entorno y modos](#id14)
+* [Clase 14 - Variables de entorno y modos](#id14)
+* [Clase 15 - Sitios multi-página](#id15)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -777,3 +778,74 @@ Se agrega un console.log y si el código esta correcto, en la consola aparecerá
 loadEnv() recibe dos parámetros, que son: 
 1. **Modo** en el que estamos (modo desarrollo o modo producción). Esto debido a que nuestro archivo .env también puede tener el nombre de *.env.development* o *.env.production*, si estamos en modo producción se traerán las variables que estén en *.env.development*, si estamos en modo producción se traerán las variables de *.env.production* y si no existen ninguno de estos archivos se traerá por defecto las de .env. 
 2. **Ubicación** por la cual se accede vía Nodejs para leer el archivo. Para acceder a la ubicación podemos usar process.cwd(), una función de Nodejs que nos entrega la dirección del proyecto.
+
+## Sitios multi-página [15/19]<a name="id15"></a>
+Con Vite podremos ser capaces de generar proyectos con múltiples páginas de inicio, esto quiere decir que además del index.html (por lo general entrada de un proyecto en Vite), podremos tener más archivos que se comporten como una página separada a este, con sus propias dependencias, sus propios elementos y completamente individuales.
+Haremos uso de las tecnologías de **Vite** y **Rollup** al mismo tiempo.
+
+### Creando otra página inicial
+Antes de empezar con la configuración vamos a crear una nueva carpeta llamada **help** y dentro se crea un archivo llamado **help.html**, se abre el archivo y se utiliza la plantilla facilitada por el profesor en la sección de recursos.
+
+### Configurando Vite con Rollup
+Se vuelve a abrir el archivo **vite.config.js**.
+Se genera una configuración que permita retornar diferentes cosas dependiendo del modo.
+Se edita la condición if-else.
+Si el modo es igual a *development*  se mueve el código que teníamos para cambiar el puerto del servidor.
+
+En cambio, si es otro modo se retornara el proceso para realizar el build. Se crea un proceso para definir un JSON de configuración que utilizara las herramientas de Rollup:
+1. Se accede a las propiedades de configuración de Rollup utilizando la palabra reservada *rollupOptions* y dentro se define un JSON. Aquí es donde se habilitara una segunda pagina de entrada a nuestro proyecto.
+2. Se definen los input en un nuevo json que recibirá una clave y valor:
+	+ La llave **main**, resolverá la ruta al archivo **index.html** utilizando la función de nodejs llamada **resolve()**. Se agrega como parámetro la variable de Node **__dirname** seguido del archivo que quiero referenciar.
+	+ La llave **help**, resolverá la ruta al archivo **help.html**. *IMPORTANTE:* como la dirección a resolver se encuentra dentro de una carpeta y luego el archivo, se debe separar con coma los valores de **help** y **help.html**.
+3. Se importa el método **resolve** que es parte de las herramientas de Nodejs y se encuentra en el modulo **path**. Este método permite obtener una dirección de una carpeta según le pasemos una *dirección relativa* y nos devuelve una *dirección absoluta*.
+
+```javascript
+import { defineConfig, loadEnv } from "vite";
+
+import { resolve } from 'path'
+
+export default defineConfig(({ command, mode }) => {
+	const port = 3000;
+
+	const env = loadEnv(mode, process.cwd());
+
+	if (mode === "development") {
+		console.log("modo desarrollo");
+		return {
+			server: {
+				port
+			}
+	}
+	} else {
+		console.log("modo producción")
+		return {
+			build: {
+				rollupOptions: {
+					input: {
+						main: resolve(__dirname, 'index.html'),
+						help: resolve(__dirname, 'help', 'help.html')
+					}
+				}
+			}
+		}
+	}
+});
+```
+
+### Ver la nueva pagina en el navegador
+Lo primero sera volver a levantar el servidor, para ello, en la consola ejecutar el comando:
+```
+npm run dev
+```
+De momento, ya que la pagina **index.html** no tiene un enlace directo a la nueva pagina, se puede acceder al nuevo archivo de forma manual, escribiendo la siguiente url:
+```
+http://localhost:8080/help/help.html
+```
+Aprovechamos para crear el código para producción, se detiene la ejecución del servidor y ejecutamos el comando:
+```
+npm run build
+```
+Se actualiza el contenido de la carpeta **dist** con todos los archivos que ya tenia ademas de la nueva carpeta help y dentro todos sus archivos correspondientes (si hubiese tenido archivos css o js extras, aquí estarían también)
+
+### Micro Frontends
+Lo que vimos en esta clase es una tendencia de trabajo que esta siendo muy popular hoy en dia y se conoce como micro frontend, es una forma de pensar el frontend de manera que tengas múltiples frameworks coexistiendo en el mismo proyecto.
