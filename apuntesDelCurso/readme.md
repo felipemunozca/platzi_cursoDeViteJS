@@ -16,6 +16,7 @@
 * [Clase 13 - Vite Config](#id13)
 * [Clase 14 - Variables de entorno y modos](#id14)
 * [Clase 15 - Sitios multi-página](#id15)
+* [Clase 16 - Construir librerías](#id16)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -849,3 +850,66 @@ Se actualiza el contenido de la carpeta **dist** con todos los archivos que ya t
 
 ### Micro Frontends
 Lo que vimos en esta clase es una tendencia de trabajo que esta siendo muy popular hoy en dia y se conoce como micro frontend, es una forma de pensar el frontend de manera que tengas múltiples frameworks coexistiendo en el mismo proyecto.
+
+## Construir librerías [16/19]<a name="id16"></a>
+Con Vite además de poder crear proyectos web, también se pueden crear librerías o módulos para utilizar en frontend o incluso Node.js. 
+Esto se puede lograr definiendo un archivo en JavaScript o TypeScript como entrada y que a la hora de producción el resultado sea todo lo que este archivo hace referencia.
+
+### Agregando los archivos necesarios
+Antes de realizar la configuración de Vite, se crea una carpeta llamada **lib**, dentro de esta un archivo llamado **main.js** que actuara como la entrada de la librería y donde se escribirá un código bastante simple para mostrar un mensaje por la consola
+```
+console.log("HOLA desde lib/main.js");
+```
+
+### Configurando Vite para crear una librería
+Se vuelve a editar el archivo **vite.config.js**, se quita toda la sección de como utilizar Rollup y se comienza a editar las opciones para crear una librería:
+
+* Se crea un JSON de configuración llamado lib: { }.
+
+* El primer valor sera el punto de entrada, para esto utilizaremos entry al cual se le pasara la función **resolve()** y dentro se define la ruta a la carpeta **lib** y el archivo **main.js**.
+
+* El segundo valor sera el name con el que se va a distribuir la librería, en este caso sera **demo**.
+
+* El tercer valor sera el tipo de archivo que se generara y la compatibilidad que tendrá. Se utiliza la opción **fileName** perteneciente a Vite seguido de una función flecha. Se pasa como parámetro el format (que puede ser umd, es6+, etc) y se retorna una cadena de texto con el nombre seguido del formato y la extension js.
+
+```javascript
+import { defineConfig, loadEnv } from "vite";
+import { resolve } from 'path';
+
+export default defineConfig(({ command, mode }) => {
+	const port = 8080;
+
+	const env = loadEnv(mode, process.cwd())
+
+	if (mode === "development") {
+		console.log("modo desarrollo")
+		return {
+			server: {
+				port
+			}
+		}
+	} else {
+		console.log("modo producción")
+		return {
+			build: {
+				lib: {
+					entry: resolve(__dirname, 'lib', 'main.js'),
+					name: 'demo',
+					fileName: (format) => `demo.${format}.js`
+				}
+			}
+		}
+	}
+});
+```
+
+### Ejecución de la librería
+De vuelta en la consola del proyecto, ejecutamos el comando:
+```
+npm run build
+```
+Dentro de la carpeta dist se crearon 2 archivos:
+* demo.es.js 
+* demo.umd.js 
+
+Además, ya se puede distribuir la librería con npm o usarla en el entorno propio.

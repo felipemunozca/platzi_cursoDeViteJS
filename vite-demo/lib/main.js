@@ -1,0 +1,1 @@
+console.log("HOLA desde lib/main.js");

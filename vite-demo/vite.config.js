@@ -71,6 +71,7 @@ export default defineConfig(({ command, mode }) => {
 });
 */
 
+/*
 import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ command, mode }) => {
@@ -92,4 +93,69 @@ export default defineConfig(({ command, mode }) => {
 			port
 		},
 	};
+});
+*/
+
+// Como utilizar Rollup en un proyecto.
+/*
+import { defineConfig, loadEnv } from "vite";
+
+import { resolve } from 'path'
+
+export default defineConfig(({ command, mode }) => {
+	const port = 3000;
+
+	const env = loadEnv(mode, process.cwd());
+
+	if (mode === "development") {
+		console.log("modo desarrollo");
+		return {
+			server: {
+				port
+			}
+	}
+	} else {
+		console.log("modo producción")
+		return {
+			build: {
+				rollupOptions: {
+					input: {
+						main: resolve(__dirname, 'index.html'),
+						help: resolve(__dirname, 'help', 'help.html')
+					}
+				}
+			}
+		}
+	}
+});
+*/
+
+// Como crear una librería
+import { defineConfig, loadEnv } from "vite";
+import { resolve } from 'path';
+
+export default defineConfig(({ command, mode }) => {
+	const port = 8080;
+
+    const env = loadEnv(mode, process.cwd())
+
+    if (mode === "development") {
+        console.log("modo desarrollo")
+        return {
+            server: {
+                port
+            }
+        }
+    } else {
+        console.log("modo producción")
+        return {
+            build: {
+                lib: {
+                    entry: resolve(__dirname, 'lib', 'main.js'),
+                    name: 'demo',
+                    fileName: (format) => `demo.${format}.js`
+                }
+            }
+        }
+    }
 });
