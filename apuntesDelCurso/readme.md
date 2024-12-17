@@ -18,6 +18,7 @@
 * [Clase 15 - Sitios multi-página](#id15)
 * [Clase 16 - Construir librerías](#id16)
 * [Clase 17 - Soporte para React](#id17)
+* [Clase 18 - Soporte para Vue](#id18)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -956,3 +957,51 @@ Se guardan los cambios y automáticamente se ven reflejados en la ventana del na
 
 > [!NOTE]
 > Para crear un proyecto real utilizando React, se recomienda tomar la ruta completa de React y aprender las bases para realizar mi propio código.
+
+## Soporte para Vue [18/19]<a name="id18"></a>
+Vite es desarrollando por las mismas personas que desarrollaron Vue.js y a continuación vamos a ver lo sencillo que es integrar estas dos tecnologías.
+Dentro de la consola, se debe volver a posicionar dentro de la carpeta **frameworks**.
+
+### Creando un proyecto con Vue
+Para crear un proyecto con Vue se debe utilizar el mismo comando de la clase anterior:
+```
+npm create vite@latest
+```
+En la consola aparecerá una serie de preguntas de configuración como ya hemos visto en clases anteriores.
+```
+? Project name: » vite-vue
+? Select a framework: » Vue
+? Select a variant: » JavaScript
+```
+Cuando se termine de generar el nuevo proyecto, entrar a este utilizando la consola con el comando:
+```
+cd vite-vue
+```
+El ultimo paso de configuración sera instalar los paquetes y dependencias necesarios del proyecto con el comando:
+```
+npm install
+```
+Con todos los pasos anteriores completados, ya se puede levantar el servidor de desarrollo como se hizo en clases anteriores:
+```
+npm run dev
+```
+
+### Estructura
+La estructura de archivos que nos provee Vite es bastante estándar, donde primero podemos encontrar el archivo **package.json** que tiene instalado vue y el plugin de vue como dependencias. Además, también podemos encontrar los siguientes archivos:
+
+#### Carpeta public
+La carpeta **public** contiene un icono. Mientras el proyecto avance se guardaran archivos estáticos, los cuales en producción estarían del lado del servidor.
+
+#### index.html
+El archivo **index.html** contiene una etiqueta *div* con el id app, el cual referencia todo el contenido del proyecto. Además, también encontramos un script que a diferencia de React usa solamente código en **js** y no en **jsx**.
+
+#### src
+En la carpeta src destacan los siguientes archivos:
+* En **main.js** se importa la capacidad de generar proyectos con Vue.js e importa App, el primer componente del proyecto.
+
+* En **App.vue** se encuentra una sección de código en javascript, la sección de template la cual muestra el código donde se va a dibujar la página web y la sección de estilos.
+
+* El componente **HelloWorld.vue** en la carpeta de componentes, el cual guarda el código necesario para que el contador funcione.
+
+> [!NOTE]
+> Para crear un proyecto real utilizando Vue, se recomienda tomar la ruta completa de Vue y aprender las bases para realizar mi propio código y como desplegarlo.
