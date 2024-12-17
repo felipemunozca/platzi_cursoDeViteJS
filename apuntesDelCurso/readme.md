@@ -17,6 +17,7 @@
 * [Clase 14 - Variables de entorno y modos](#id14)
 * [Clase 15 - Sitios multi-página](#id15)
 * [Clase 16 - Construir librerías](#id16)
+* [Clase 17 - Soporte para React](#id17)
 
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
@@ -913,3 +914,45 @@ Dentro de la carpeta dist se crearon 2 archivos:
 * demo.umd.js 
 
 Además, ya se puede distribuir la librería con npm o usarla en el entorno propio.
+
+## Soporte para React [17/19]<a name="id17"></a>
+Vite nos permite usar frameworks como por ejemplo react.js, vue.js y algunos otros como lit o svelte, a la vez que tenemos todas las ventajas de Vite. En este caso vamos a crear un proyecto con React y ver lo sencillo que es.
+Lo primero sera crear una nueva carpeta principal llamada **frameworks** para mantener el código ordenado.
+
+### Creando un proyecto con React
+Se abre la consola y dentro de la nueva carpeta ejecutar el comando:
+```
+npm create vite@latest
+```
+En la consola aparecerá una serie de preguntas de configuración como ya hemos visto en clases anteriores.
+```
+? Project name: » vite-react
+? Select a framework: » react
+? Select a variant: » javascript
+```
+
+Cuando se termine de generar el nuevo proyecto, entrar a este utilizando la consola con el comando:
+```
+cd vite-react
+```
+El ultimo paso de configuración sera instalar los paquetes y dependencias necesarios del proyecto con el comando:
+```
+npm install
+```
+Con todos los pasos anteriores completados, ya se puede levantar el servidor de desarrollo como se hizo en clases anteriores:
+```
+npm run dev
+```
+
+### Editar un proyecto en React
+Dentro del listado de archivos que se crearon se forma automática, se revisa **vite.config.js** que a diferencia del primero que creamos, este ya trae importado el uso de **react** de forma automática y se definió como un plugin.
+Dentro de la carpeta **src** estarán todos los archivos necesarios para crear una aplicación con React básica.
+Se abre el archivo **src/app.jsx** y se agrega el siguiente cambio:
+```javascript
+<h1>Vite + React</h1>
+<p>Texto editado por Felipe Muñoz</p>
+```
+Se guardan los cambios y automáticamente se ven reflejados en la ventana del navegador.
+
+> [!NOTE]
+> Para crear un proyecto real utilizando React, se recomienda tomar la ruta completa de React y aprender las bases para realizar mi propio código.
