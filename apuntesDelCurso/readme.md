@@ -32,7 +32,10 @@ Vite nos va a permitir tener una mejor experiencia de desarrollo y nos aporta to
 * Trae una serie de optimizaciones por debajo que nos permitirá que nuestros proyectos queden mucho mejor estructurados, sin necesidad de una configuración complicada.
 
 > [!TIP]
-> El nombre Vite se pronuncia **BIT** y no **BAIT** porque viene del francés y no del inglés
+> El nombre Vite se pronuncia **BIT** y no **BAIT** porque viene del francés y no del inglés.
+
+> [!IMPORTANT]
+> Vite es una herramienta de desarrollo frontend de tercera generación.
 
 ## Historia del Ecosistema de JavaScript [2/19]<a name="id2"></a>
 Cuando la web comenzó únicamente eran páginas de texto con algunas imágenes y enlaces.
@@ -99,9 +102,15 @@ var data = {
 var data={name:"Diana",age:27};
 ```
 
+> [!IMPORTANT]
+> El proceso de **minificación** es en el que se elimina el contenido innecesario como espacios y comentarios, para hacer paquetes mas ligeros en producción.
+
 ### Bundling
 A veces tienes muchos módulos dentro de un mismo sitio web y muchos de estos los consumes al mismo tiempo. Aquí es donde entra el bundling, un proceso donde se toman todos estos módulos y se convierten en un solo archivo minificado y listo para utilizar.
 Su ventaja esta en que cuando el usuario ingresa al sitio, solo descargue un archivo de configuración una sola vez, mejorando el performance.
+
+> [!IMPORTANT]
+> El proceso de **bundling** es en el que se optimiza el código en paquetes para producción, eliminando el código innecesario y separando o juntando los módulos necesarios.
 
 ### Node.js
 Trae toda una revolución, permitiendo a las personas usar JavaScript del lado del backend para modificar la forma en la que se comportan las páginas web.
@@ -161,13 +170,22 @@ Es la etapa donde se estandarizan los módulos.
 Adapta los módulos en CommonJS o UMD y los pasa al formato estándar de ECMAScript.
 *Los módulos por muchos años NO estuvieron estandarizados hasta que apareció el estándar de ECMAScript con los ES Modules.*
 
+> [!IMPORTANT]
+> El proceso de **pre-bundling** agrega compatibilidad, pues adapta módulos en CommonJS o UMD, al formato estándar de ECMAScript, los ES modules.
+
 ### Dependency resolving
 Vite optimiza el proceso en que se obtienen librerías y módulos estandarizados.
 Lo primero que hace Vite.js es generar un **servidor de archivos estático**, es decir, que va a tomar todos los archivos del proyecto y los va a hacer disponibles para acceder desde el navegador, de esta manera va a reemplazar los **imports** vía node.js por **imports URL**.
 También se asegura de servir los archivos de forma inteligente y con caché, para optimizar tiempo y procesamiento, esto lo hace subdividiendo las dependencias y ordenando las importaciones para que todo esté listo para el momento de uso, utilizando un caché fuerte, el cual se asegura que los archivos se queden en el navegador a menos que se limpie la caché del mismo
 
+> [!IMPORTANT]
+> La **resolución de dependencias** en vite funciona exponiendo todo como un servidor de archivos estáticos y aprovecha el cache del navegador para ganar performance.
+
 ### Hot module replacement (HMR)
 El HMR es cuando se hace **un cambio en el código y este se ve reflejado en el navegador casi de forma inmediata**, sin perder el estado de la aplicación y sin tener que recargar el navegador. Esto nos otorga una mejor experiencia de desarrollo al ser más rápido.
+
+> [!IMPORTANT]
+> El **HMR** o Hot Module Replacement, es la estrategia que permite visualizar los cambios del código en tiempo real en el navegador, manteniendo el estado.
 
 ### Importación de archivos
 Nos otorgará una importación de archivos simplificada. 
@@ -206,6 +224,9 @@ Se pueden generar diferentes proyectos con Vite a partir de una plantilla que bi
 > [!NOTE]
 > Antes de crear nuestro proyecto con Vite asegúrate de tener como mínimo instalado Node.js 14 o una versión superior y npm.
 
+> [!IMPORTANT]
+> Con Vite se pueden crear proyectos de frontend con cualquier framework compatible y librerías de componentes, etc.
+
 ### Comandos para generar un proyecto
 El comando para generar un proyecto con Vite es uno de los siguientes y dependerá del *gestor de paquetes* que utilices.
 
@@ -238,14 +259,14 @@ Primero, tenemos que ir al editor de código de tu preferencia, en este caso emp
 Abrir la terminal, copia y pegar uno de los comandos antes vistos en el punto anterior.
 
 Pero antes, una muy buena recomendación es revisar las versiones de node y npm instalados en mi computador utilizando los siguientes comandos:
-> [!IMPORTANT]
+> [!NOTE]
 > node -v 
 > 20.18.0
 > npm -v
 > 10.8.2
 
 Y como punto de comparación, se agregan las versiones que el profesor utilizara en este curso:
-> [!IMPORTANT]
+> [!NOTE]
 > node -v 
 > 16.13.2
 > npm -v
@@ -318,6 +339,9 @@ Si seguimos revisando los archivos, en la carpeta raiz encontraremos el archivo 
 Importar archivos con Vite es muy simple, por ejemplo para los archivos de estilos solo debemos de usar la palabra **@import** y a continuación la ruta del archivo dentro de comillas. 
 Para los archivos en JavaScript sería muy parecido, solo que se remplaza **@import** por **import**.
 
+> [!IMPORTANT]
+> Para importar archivos de CSS en Vite, con **@import** en archivos de estilos, y con **import** en archivos de código.
+
 ### Manejo de estilos en Vite
 Se crea un nuevo archivo de estilos llamado **base.css**.
 Dentro, se agrega la siguiente regla CSS:
@@ -334,7 +358,7 @@ Debemos de importar el archivo **base.css** dentro de **style.css**.
 @import './base.css';
 ```
 Si el código CSS fue agregado correctamente, ahora el color de fondo de la pagina web sera verde.
-> [!IMPORTANT]
+> [!TIP]
 > Importante, se debe utilizar *@import* y a continuación la ruta de los estilos.
 
 ### Analizando los estilos
@@ -350,6 +374,9 @@ Si se desea eliminar estas copias se puede reiniciar el navegador o ir a la pest
 
 ### Optimizaciones de Vite
 Si vamos al último archivo **style.css** en el navegador, veremos que contiene el código hecho en base.css, esto sucede porque Vite une archivos suficientemente pequeños con otros, para tratarlos como solo uno. Si los archivos son demasiado grandes, va a tratarlos por separado.
+
+> [!IMPORTANT]
+> La tecnología que utiliza Vite para el procesamiento de CSS es PostCSS, que da soporte para la optimización en producción, y también para usar pre-procesadores.
 
 ## Pre-procesadores CSS [7/19]<a name="id7"></a>
 Utilizar preprocesadores de CSS, como por ejemplo **Sass** o **Less**, en Vite, es demasiado fácil, literalmente no tenemos que hacer nada para empezar a usar estas tecnologías.
@@ -511,6 +538,9 @@ Si solo se quiere traer una parte especifica del JSON, por ejemplo el user, se a
 ```
 ![cargar json al proyecto](img/clase10-1.png)
 
+> [!IMPORTANT]
+> Es bueno utilizar la desestructuración al importar JSON porque permite optimizar el build para producción, al eliminar todo el código innecesario.
+
 ### Enviar el proyecto a producción
 Con los cambios y pruebas que hemos realizados hasta ahora, se realiza una prueba enviando el proyecto a producción. Para esto se debe ejecutar el comando:
 ```
@@ -523,6 +553,9 @@ Dentro del archivo mainxxxxx.js revisar como queda el código al cargar el json 
 
 ## Importación global [11/19]<a name="id11"></a>
 La importación global nos permite importar archivos de forma masiva, es decir, poder tomar toda una carpeta e importarla de una sola vez para usarla dentro del código.
+
+> [!IMPORTANT]
+> La ventaja de la importación global es que podemos importar archivos de forma masiva utilizando JavaScript, para no tener que importar cada elemento nuevamente.
 
 ### Creando los módulos
 Primero, se deben crear los archivos que queremos importar. 
@@ -595,6 +628,9 @@ Si el código se escribió de forma correcta, en la consola del navegador se deb
 ## Uso con TypeScript [12/19]<a name="id12"></a>
 Ahora vamos a ver como Vite detecta y procesa los archivos de TypeScript sin la necesidad de tener que hacer una configuración complicada, aunque si nosotros lo deseamos podemos cambiar esa configuración por defecto y que TypeScript se comporte como nosotros queramos.
 
+> [!IMPORTANT]
+> Muy a menudo surge la pregunta, ¿Cuál es el plugin de Vite para utilizar TypeScript?, y la respuesta es simple, **Ninguno** ya que Vite soporta TypeScript sin configuración adicional.
+
 ### Usando TypeScript con Vite
 Para comenzar a utilizar TypeScript en este proyecto literalmente no tenemos que hacer nada. 
 Se crea un nuevo archivo que se llamara **suma.ts**, dentro se crea una función para sumar dos valores.
@@ -629,7 +665,7 @@ De esta manera se puede generar el código dependiendo de que version de javascr
 	}
 }
 ```
-> [!IMPORTANT]
+> [!TIP]
 > Si se utiliza la opción de personalizar, cuando se ejecute el código, se recomienda limpiar la cache del navegador ya que puede que los cambios no se refresquen solo con actualizar el navegador.
 
 Para probar si funciono la configuración, se ejecuta el comando:
@@ -647,9 +683,15 @@ Otra de las propiedades únicas de Vite, es que se puede crear su propio archivo
 Antes de continuar, para resolver cualquier duda, revisar la documentación oficial:
 https://vite.dev/config/#config-file-resolving
 
+> [!IMPORTANT]
+> El archivo de configuración de Vite nos sirve para tomar el control del proceso de desarrollo y producción.
+
 ### Configurando Vite
 Dentro de la carpeta raíz, se crea un nuevo archivo llamado **"vite.config.js"** (La configuración se realizara con javascript).
 Con el archivo vite.config.js podremos tomar el control de todo lo que hace Vite y poder reescribir sus configuraciones por defecto, desde cambiar la carpeta, raíz del proyecto, configuraciones al servidor, uso de plugins, opciones para el build, entre muchas más.
+
+> [!IMPORTANT]
+> El archivo de configuración de Vite siempre sera vite.config.js
 
 ### Primer método de configuración
 Existen varias formas de configurar Vite, la más sencilla es exportando un JSON. 
@@ -755,6 +797,8 @@ export default defineConfig(({ command, mode }) => {
 	};
 });
 ```
+> [!IMPORTANT]
+> Los dos modos de Vite son **Desarrollo** (dev) y **Producción** (build).
 
 ### Variables de entorno
 Dentro de la carpeta raíz del proyecto se crea un nuevo archivo llamado **.env** y dentro de este archivo se crearan las variables de entorno que sean necesarias.
@@ -767,6 +811,9 @@ Vite por defecto no lee ninguna de estas variables, la única forma de que las r
 VITE_NAME="Vite demo curso Platzi"
 VITE_PORT=8080
 ```
+
+> [!IMPORTANT]
+> Para utilizar las variables de entorno para poder usarlas en el frontend es con la palabra reservada **VITE** (Todo escrito en mayúsculas).
 
 ### Usando variables de entorno
 Dentro del archivo **vite.config.js**, se debe importar el nombre de la función **loadEnv** para poder utilizar las variables.
@@ -920,6 +967,9 @@ Además, ya se puede distribuir la librería con npm o usarla en el entorno prop
 Vite nos permite usar frameworks como por ejemplo react.js, vue.js y algunos otros como lit o svelte, a la vez que tenemos todas las ventajas de Vite. En este caso vamos a crear un proyecto con React y ver lo sencillo que es.
 Lo primero sera crear una nueva carpeta principal llamada **frameworks** para mantener el código ordenado.
 
+> [!IMPORTANT]
+> Se puede utilizar Vite para un proyecto con React, y lo mas importante, con soporte completo.
+
 ### Creando un proyecto con React
 Se abre la consola y dentro de la nueva carpeta ejecutar el comando:
 ```
@@ -961,6 +1011,9 @@ Se guardan los cambios y automáticamente se ven reflejados en la ventana del na
 ## Soporte para Vue [18/19]<a name="id18"></a>
 Vite es desarrollando por las mismas personas que desarrollaron Vue.js y a continuación vamos a ver lo sencillo que es integrar estas dos tecnologías.
 Dentro de la consola, se debe volver a posicionar dentro de la carpeta **frameworks**.
+
+> [!IMPORTANT]
+> Se puede utilizar Vite para un proyecto en Vue, y lo mas importante, con soporte completo.
 
 ### Creando un proyecto con Vue
 Para crear un proyecto con Vue se debe utilizar el mismo comando de la clase anterior:
