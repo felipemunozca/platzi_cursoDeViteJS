@@ -20,6 +20,8 @@
 * [Clase 17 - Soporte para React](#id17)
 * [Clase 18 - Soporte para Vue](#id18)
 
+---
+
 ## ¿Qué es Vite? [1/19]<a name="id1"></a>
 Vite es una herramienta de **tercera generación** para el desarrollo de frontend, la cual recolecta todas las tecnologías que se utilizan en el estándar de desarrollo web moderno, como por ejemplo webpack, create-react-app, etc.
 
@@ -36,6 +38,8 @@ Vite nos va a permitir tener una mejor experiencia de desarrollo y nos aporta to
 
 > [!IMPORTANT]
 > Vite es una herramienta de desarrollo frontend de tercera generación.
+
+---
 
 ## Historia del Ecosistema de JavaScript [2/19]<a name="id2"></a>
 Cuando la web comenzó únicamente eran páginas de texto con algunas imágenes y enlaces.
@@ -158,6 +162,8 @@ Es un lenguaje de programación tipado que se transpila hacia JavaScript bastant
 De esta manera llegamos a Vite.js
 Su objetivo es mejorar la experiencia de desarrollo teniendo una mejor velocidad y menor configuración.
 
+---
+
 ## Características de Vite [3/19]<a name="id3"></a>
 En esta clase vamos a ver las principales características de Vite.
 Destaca la reinvención de muchos procesos, como la resolución de dependencias, la implementación con TypeScript, el HMR, entre muchas otras funcionalidades.
@@ -212,6 +218,8 @@ Optimiza el bundle de producción gracias a Rollup. La importación de dependenc
 ### Soporte a Web Workers y Web Assembly
 Los Web Workers son una característica de JavaScript que permiten crear procesos alternativos al proceso principal. Implementarlos puede llegar a tener una configuración complicada, pero con Vite no, teniendo la posibilidad de importarlos de una manera específica y estar listos para ser usados.
 Aunque también existe la posibilidad de importar un archivo Web Assembly e invocarlo donde queramos que se ejecute.
+
+---
 
 ## ¿Cómo instalar Vite? [4/19]<a name="id4"></a>
 Para comenzar a usar Vite.js vamos a ir a su documentación oficial https://vite.dev/ donde se podrá encontrar los beneficios que tiene, plugins, el repositorio público, las configuraciones disponibles, entre muchos más recursos que pueden ser útiles a la hora de querer profundizar los temas.
@@ -305,6 +313,8 @@ VITE v6.0.1  ready in 231 ms
   ➜  press h + enter to show help
 ```
 
+---
+
 ## Boilerplate de Vite [5/19]<a name="id5"></a>
 Una vez iniciado un proyecto con una plantilla de Vite tendrás a tu disposición una estructura básica de archivos, que nos facilitara iniciar con el desarrollo. Cada plantilla tiene su propia estructura, y por suerte todo funciona de una manera similar.
 
@@ -334,6 +344,8 @@ Si seguimos revisando los archivos, en la carpeta raiz encontraremos el archivo 
 * **dev**: Inicializa el servidor.
 * **build**: Genera nuestro proyecto para producción y lo almacenara en la carpeta dist que se creara automaticamente.
 * **preview**: Una vez tenemos nuestro proyecto para producción se ejecuta este comando, el cual toma lo que está en la carpeta dist y lo muestra en un servidor.
+
+---
 
 ## Importar CSS [6/19]<a name="id6"></a>
 Importar archivos con Vite es muy simple, por ejemplo para los archivos de estilos solo debemos de usar la palabra **@import** y a continuación la ruta del archivo dentro de comillas. 
@@ -377,6 +389,8 @@ Si vamos al último archivo **style.css** en el navegador, veremos que contiene 
 
 > [!IMPORTANT]
 > La tecnología que utiliza Vite para el procesamiento de CSS es PostCSS, que da soporte para la optimización en producción, y también para usar pre-procesadores.
+
+---
 
 ## Pre-procesadores CSS [7/19]<a name="id7"></a>
 Utilizar preprocesadores de CSS, como por ejemplo **Sass** o **Less**, en Vite, es demasiado fácil, literalmente no tenemos que hacer nada para empezar a usar estas tecnologías.
@@ -427,6 +441,8 @@ npm install -D less
 Si el código se cargo de forma correcta, los textos tendrán un fondo de color blanco.
 ![nuevos estilos css](img/clase7-1.png)
 
+---
+
 ## CSS Modules [8/19]<a name="id8"></a>
 Los CSS modules son una tecnología para organizar nuestro código en CSS por medio de módulos, algo muy similar a como trabajamos con las librerías de JavaScript.
 
@@ -470,6 +486,8 @@ Cuando se guarden los cambios, el botón tendrá los estilos que indicados en el
 
 Esta es una manera estándar que nos ofrece CSS para separar nuestro código y que los estilos sean únicos hacia el componente que lo estamos importando.
 
+---
+
 ## Importar imágenes [9/19]<a name="id9"></a>
 Importar una imagen o cualquier archivo multimedia con Vite es bastante sencillo, simplemente debes de usar la palabra clave import, definir un nombre para la imagen e indicar donde se encuentra.
 Se agrega una imagen dentro de la carpeta src.
@@ -500,6 +518,8 @@ Al abrir las herramientas de desarrollo, en la pestaña de sources, podremos enc
 ![viendo archivos en el navegador](img/clase9-2.png)
 
 Este último es un ECMAScript module que contiene nuestra imagen. Vite convierte todo a un ECMAScript module para un mejor rendimiento.
+
+---
 
 ## Importar JSON [10/19]<a name="id10"></a>
 Con Vite podemos importar todo el contenido de un archivo JSON de una manera muy simple, aunque también podemos traer partes específicas para optimizar el código y mejorar el rendimiento en producción.
@@ -547,9 +567,12 @@ Con los cambios y pruebas que hemos realizados hasta ahora, se realiza una prueb
 npm run build
 ```
 Se genera automáticamente la carpeta **dist**. Dentro, los archivos tendrán un nombre compuesto por el nombre original del archivo, seguido de un hash (serie de números y letras).
+
 ![lista de archivos](img/clase10-2.png)
 
 Dentro del archivo mainxxxxx.js revisar como queda el código al cargar el json y la diferencia entre ambas opciones.
+
+---
 
 ## Importación global [11/19]<a name="id11"></a>
 La importación global nos permite importar archivos de forma masiva, es decir, poder tomar toda una carpeta e importarla de una sola vez para usarla dentro del código.
@@ -625,6 +648,8 @@ for (const path in modules) {
 Si el código se escribió de forma correcta, en la consola del navegador se deberían ver los mensajes escritos en cada modulo.
 ![resultados en la consola](img/clase11-2.png)
 
+---
+
 ## Uso con TypeScript [12/19]<a name="id12"></a>
 Ahora vamos a ver como Vite detecta y procesa los archivos de TypeScript sin la necesidad de tener que hacer una configuración complicada, aunque si nosotros lo deseamos podemos cambiar esa configuración por defecto y que TypeScript se comporte como nosotros queramos.
 
@@ -677,6 +702,8 @@ El código en javascript que escribimos manualmente ahora estará transformado a
 
 Por ultimo si se desea saber mas de como usar un archivo **tsconfig** y sus diferentes opciones, se puede visitar este enlace oficial de la documentación de TypeScript.
 https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+---
 
 ## Vite Config [13/19]<a name="id13"></a>
 Otra de las propiedades únicas de Vite, es que se puede crear su propio archivo de configuración.
@@ -738,6 +765,8 @@ export default defineConfig(() => {
 ```
 Este ejemplo nos sirve para entender que aquí se puede agregar una llamada al backend, a una API, a alguna información que nos ayude a tomar decisiones.
 
+---
+
 ## Variables de entorno y modos [14/19]<a name="id14"></a>
 Continuando con lo visto en la clase anterior, hay dos conceptos que se necesitan entender y que pueden llegar a ser bastante útiles:
 1. **Variables de entorno**, son variables externas a nuestro proyecto y no son más que un nombre asignado a un valor.
@@ -767,6 +796,7 @@ Si el servidor esta abajo y se ejecuta el comando
 npm run dev
 ```
 Aparecerá un mensaje de la siguiente manera:
+
 ![mensaje dev](img/clase14-1.png)
 
 Pero si se vuelve a bajar el servidor, y esta vez se ejecuta el comando: 
@@ -774,6 +804,7 @@ Pero si se vuelve a bajar el servidor, y esta vez se ejecuta el comando:
 npm run build
 ```
 Aparecerá un mensaje de la siguiente manera:
+
 ![mensaje build](img/clase14-2.png)
 
 Este método de programación puede llegar a ser útil porque se puede implementar una lógica dependiendo del modo en que estemos, en el siguiente ejemplo muy básico se imprimirá un mensaje dependiendo del modo.
@@ -822,12 +853,15 @@ Se crea una nueva constante, donde se almacenara el valor de env, seguido de la 
 * El directorio o ubicación donde esta el archivo.
 Se utiliza una función de Node, la función process.cwd() que buscara en todas las carpetas.
 Se agrega un console.log y si el código esta correcto, en la consola aparecerá la información del archivo .env asi como una búsqueda mas detallada de un solo valor.
+
 ![mensajes env](img/clase14-3.png)
 
 ### Acerca de loadEnv
 loadEnv() recibe dos parámetros, que son: 
 1. **Modo** en el que estamos (modo desarrollo o modo producción). Esto debido a que nuestro archivo .env también puede tener el nombre de *.env.development* o *.env.production*, si estamos en modo producción se traerán las variables que estén en *.env.development*, si estamos en modo producción se traerán las variables de *.env.production* y si no existen ninguno de estos archivos se traerá por defecto las de .env. 
 2. **Ubicación** por la cual se accede vía Nodejs para leer el archivo. Para acceder a la ubicación podemos usar process.cwd(), una función de Nodejs que nos entrega la dirección del proyecto.
+
+---
 
 ## Sitios multi-página [15/19]<a name="id15"></a>
 Con Vite podremos ser capaces de generar proyectos con múltiples páginas de inicio, esto quiere decir que además del index.html (por lo general entrada de un proyecto en Vite), podremos tener más archivos que se comporten como una página separada a este, con sus propias dependencias, sus propios elementos y completamente individuales.
@@ -900,6 +934,8 @@ Se actualiza el contenido de la carpeta **dist** con todos los archivos que ya t
 ### Micro Frontends
 Lo que vimos en esta clase es una tendencia de trabajo que esta siendo muy popular hoy en dia y se conoce como micro frontend, es una forma de pensar el frontend de manera que tengas múltiples frameworks coexistiendo en el mismo proyecto.
 
+---
+
 ## Construir librerías [16/19]<a name="id16"></a>
 Con Vite además de poder crear proyectos web, también se pueden crear librerías o módulos para utilizar en frontend o incluso Node.js. 
 Esto se puede lograr definiendo un archivo en JavaScript o TypeScript como entrada y que a la hora de producción el resultado sea todo lo que este archivo hace referencia.
@@ -963,6 +999,8 @@ Dentro de la carpeta dist se crearon 2 archivos:
 
 Además, ya se puede distribuir la librería con npm o usarla en el entorno propio.
 
+---
+
 ## Soporte para React [17/19]<a name="id17"></a>
 Vite nos permite usar frameworks como por ejemplo react.js, vue.js y algunos otros como lit o svelte, a la vez que tenemos todas las ventajas de Vite. En este caso vamos a crear un proyecto con React y ver lo sencillo que es.
 Lo primero sera crear una nueva carpeta principal llamada **frameworks** para mantener el código ordenado.
@@ -1007,6 +1045,8 @@ Se guardan los cambios y automáticamente se ven reflejados en la ventana del na
 
 > [!NOTE]
 > Para crear un proyecto real utilizando React, se recomienda tomar la ruta completa de React y aprender las bases para realizar mi propio código.
+
+---
 
 ## Soporte para Vue [18/19]<a name="id18"></a>
 Vite es desarrollando por las mismas personas que desarrollaron Vue.js y a continuación vamos a ver lo sencillo que es integrar estas dos tecnologías.
